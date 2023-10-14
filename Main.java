@@ -100,8 +100,11 @@ public class Main {
                     System.out.println(ia[i]);
 
                 } else {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-                    writer.write("\n\n\n" + ia[i]);
+                    FileWriter fw = new FileWriter(fileName, true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write("\n\n\n" + ia[i]);
+                    bw.newLine();
+                    bw.close();
                 }
             }
         }
