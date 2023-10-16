@@ -50,59 +50,34 @@ public class Main {
             }
             char[] ca = Str.toCharArray();
 
-            /*
-             * int[] ia = new int[100];
-             * int j = 0;
-             * while (scanner.hasNextInt()) {
-             * ia[j++] = scanner.nextInt();
-             * }
-             */
-
             System.out.println("\nCA: ");
             for (int i = 0; i < ca.length; i++) {
                 System.out.print(ca[i]);
             }
 
-            // int ia = Integer.parseInt(new String(ca));
-
             int count = 0;
-            int count1 = 0;
+
             for (int i = 0; i < ca.length; i++) {
                 if ((ca[i] >= '0') && (ca[i] <= '9')) {
                     count += 1;
 
-                } else
-                    count1 += 1;
+                }
             }
 
             int[] ia = new int[count];
 
-            for (int i = 0; i < ca.length; i++) {
+            for (int i = 0, j = 0; i < ca.length; i++) {
                 if ((ca[i] >= '0') && (ca[i] <= '9')) {
-                    for (int j = 0; j < count; j++)
-                        ia[j] = ca[i] - '0';
-                    /*
-                     * for (int i = 0; i < Str.length(); i++) {
-                     * if ((Str.charAt(i) >= '0') && (Str.charAt(i) <= '9'))
-                     * for (int k = 0; k < count; k++) {
-                     * ia[k] = Str.charAt(i) - '0';
-                     * }
-                     */
+                    ia[j++] = ca[i] - '0';
                 }
             }
 
-            /*
-             * System.out.println("\nIA: ");
-             * for (int i : ia) {
-             * System.out.println(i);
-             * }
-             */
             System.out.println("\n\nIA: ");
             for (int i = 0; i < ia.length; i++) {
                 System.out.println(ia[i]);
             }
 
-            System.out.println("\nLine: " + count + "\nLineW: " + count1);
+            System.out.println("\nLine: " + count);
 
             int sum = 0;
             for (int i = 0; i < ia.length; i++) {
@@ -117,47 +92,47 @@ public class Main {
 
             for (int i = 0; i < ia.length; i++) {
                 if (ia[i] >= sa) {
-                    System.out.println(ia[i++]);
+                    System.out.println(ia[i]);
 
                 } else {
                     FileWriter fw = new FileWriter(fileName1, true);
                     BufferedWriter bw = new BufferedWriter(fw);
-                    bw.write("\n\n\n" + ia[i]);
+                    bw.write("\n" + ia[i]);
                     bw.newLine();
                     bw.close();
                 }
             }
         }
+        System.out.println();
     }
 
     public static void main2(String[] args) throws IOException {
 
-        File file = new File("N1.txt");
-        File file1 = new File("N2.txt");
-        File file2 = new File("N3.txt");
-        int count = 0;
-        int count1 = 0;
-        int count2 = 0;
-        try (Scanner sc = new Scanner(new FileInputStream(file))) {
-            while (sc.hasNext()) {
-                sc.next();
-                count++;
+        try (Scanner in = new Scanner(System.in)) {
+            System.out.println("N: ");
+            int n = in.nextInt();
+
+            int[] count = new int[n];
+
+            Scanner s = new Scanner(System.in);
+            String[] fileName = new String[n];
+
+            System.out.println("Name: ");
+
+            for (int k = 0; k < n; k++) {
+                fileName[k] = s.nextLine();
             }
-            System.out.println("File: " + file + "  |  Number: " + count);
-        }
-        try (Scanner sc = new Scanner(new FileInputStream(file1))) {
-            while (sc.hasNext()) {
-                sc.next();
-                count1++;
+            System.out.println("\n");
+            for (int i = 0; i < n; i++) {
+                try (Scanner sc = new Scanner(new FileInputStream(fileName[i]))) {
+                    while (sc.hasNext()) {
+                        sc.next();
+                        count[i] += 1;
+                    }
+                    System.out.println("File: " + fileName[i] + "  |  Number: " + count[i]);
+                }
             }
-            System.out.println("File: " + file1 + "  |  Number: " + count1);
-        }
-        try (Scanner sc = new Scanner(new FileInputStream(file2))) {
-            while (sc.hasNext()) {
-                sc.next();
-                count2++;
-            }
-            System.out.println("File: " + file2 + "  |  Number: " + count2 + "\n");
+            System.out.println("\n");
         }
     }
 }
